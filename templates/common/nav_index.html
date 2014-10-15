@@ -1,0 +1,41 @@
+<div class="accordion" fillSpace="sidebar">
+	<div class="accordionHeader">
+		<h2><span>Folder</span>系统管理</h2>
+	</div>
+	<div class="accordionContent">
+		<ul class="tree treeFolder expand">
+			
+			{% ifcontain 'account' request.session.authority_list_module %}
+			<li><a>帐号管理</a>
+				<ul>
+					{% ifcontain 'accountsuperuser' request.session.authority_list_button %}
+						<li><a href="{% url 'accounts_index' %}" target="navTab" rel="accountindex" title="用户管理">用户管理</a></li>
+					{% else %}
+						<li><a href="{% url 'accounts_info' user.id %}" target="navTab" rel="accountindex" title="用户信息">用户信息</a></li>
+					{% endifcontain %}
+				</ul>
+			</li>
+			{% endifcontain %}
+			
+			{% ifcontain 'authority' request.session.authority_list_module %}
+			<li><a>权限管理</a>
+				<ul>
+					<li><a href="{% url 'authority_index_role' %}" target="navTab" rel="roleindex" title="角色管理">角色管理</a></li>
+					<li><a href="{% url 'authority_index_module' %}" target="navTab" rel="moduleindex" title="模块管理">模块管理</a></li>
+					<li><a href="{% url 'authority_index_button' %}" target="navTab" rel="buttonindex" title="功能按钮">功能按钮</a></li>
+					<li><a href="{% url 'authority_index_modulefield' %}" target="navTab" rel="modulefieldindex" title="模块字段">模块字段</a></li>
+				</ul>
+			</li>
+			{% endifcontain %}
+			
+			{% ifcontain 'log' request.session.authority_list_module %}
+			<li><a>日志管理</a>
+				<ul>
+					<li><a href="{% url 'log_index' %}" target="navTab" rel="logindex" title="日志管理">日志管理</a></li>
+				</ul>
+			</li>
+			{% endifcontain %}
+					
+		</ul>
+	</div>
+</div>
